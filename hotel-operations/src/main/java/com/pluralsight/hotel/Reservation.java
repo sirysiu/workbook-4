@@ -3,6 +3,8 @@ package com.pluralsight.hotel;
 public class Reservation {
     private String roomType;
     private double price;
+    private int numberOfNights;
+    private boolean isWeekend;
 
     public String getRoomType() {
         return roomType;
@@ -36,17 +38,9 @@ public class Reservation {
         isWeekend = weekend;
     }
 
-    public int getReservationTotal() {
-        return reservationTotal;
+    public double getReservationTotal() {
+        return price * numberOfNights;
     }
-
-    public void setReservationTotal(int reservationTotal) {
-        this.reservationTotal = reservationTotal;
-    }
-
-    private int numberOfNights;
-    private boolean isWeekend;
-    private int reservationTotal;
 
 
     public Reservation(String roomType, double price, int numberOfNights, boolean isWeekend, int reservationTotal) {
@@ -54,6 +48,5 @@ public class Reservation {
         this.price = price;
         this.numberOfNights = numberOfNights;
         this.isWeekend = isWeekend;
-        this.reservationTotal = reservationTotal;
     }
 }
