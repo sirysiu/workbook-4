@@ -31,15 +31,20 @@ public class Reservation {
     }
 
     public boolean isWeekend() {
-        return isWeekend;
+       return isWeekend;
+
     }
 
     public void setWeekend(boolean weekend) {
         isWeekend = weekend;
+
     }
 
     public double getReservationTotal() {
-        return price * numberOfNights;
+        double totalCost = price * numberOfNights;
+        if (isWeekend){
+            totalCost *= 1.1;
+        } return totalCost;
     }
 
 
