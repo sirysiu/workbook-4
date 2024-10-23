@@ -14,14 +14,17 @@ public class MainApp {
     }
 
     private static void showRoom(Room r) {
-        System.out.println("Numbers of Beds: " + r.getNumberOBeds() + " \nPrice: " + r.getPrice()
-        + "\nAvailable: " + r.isAvailable());
+        System.out.println("Room: ");
+        System.out.println("Numbers of Beds: " + r.getNumberOBeds() +
+         "\nAvailable: " + r.isAvailable());
     }
     private static void showEmployee(Employee e) {
+        System.out.println("\nEmployee: ");
         System.out.println(e.getName() + " made " + e.getTotalPay());
     }
 
     private static void showReservation( Reservation r) {
+        System.out.println("\nReservation: ");
         System.out.println("Room type: " + r.getRoomType() + "\nPrice: " + r.getPrice() + "\nTotal: " + r.getReservationTotal());
     }
 }
