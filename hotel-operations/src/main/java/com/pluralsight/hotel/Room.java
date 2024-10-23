@@ -3,9 +3,9 @@ package com.pluralsight.hotel;
 import java.util.Scanner;
 
 public class Room {
-    private int numberOBeds;
-    private double price;
-    private boolean isOccupied;
+    private final int numberOBeds;
+    private final double price;
+    private final boolean isOccupied;
     private boolean isDirty;
 
     public Room(int numberOBeds, double price, boolean isOccupied, boolean isDirty) {
@@ -31,6 +31,9 @@ public class Room {
         return numberOBeds;
     }
 
+    public boolean isAvailable() {
+        return !isDirty && !isOccupied;
+    }
 
 }
 
