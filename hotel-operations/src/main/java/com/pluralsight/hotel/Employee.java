@@ -1,6 +1,5 @@
 package com.pluralsight.hotel;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -10,13 +9,13 @@ public class Employee {
     private String department;
     private double payRate;
     private double hoursWorked;
-    private String time;
 
     public String getTime() {
         LocalTime time = LocalTime.now();
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm");
         return time.format(timeFormatter);
-    }
+    } //add punchin and punched out methods
+
 
 
 

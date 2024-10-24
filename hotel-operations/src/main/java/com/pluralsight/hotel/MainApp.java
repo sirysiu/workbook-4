@@ -15,8 +15,6 @@ public class MainApp {
     }
 
 
-
-
     private static void showRoom(Room r) {
         System.out.println("Room: ");
         System.out.println("Numbers of Beds: " + r.getNumberOBeds() +

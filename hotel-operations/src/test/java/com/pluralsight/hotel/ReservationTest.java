@@ -8,6 +8,6 @@ class ReservationTest {
 
         Reservation reservation = new Reservation("King", 0,3,true,0);
 
-        assertFalse(reservation.isWeekend());
+        assertTrue(reservation.isWeekend());
     }
 }
