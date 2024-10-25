@@ -6,6 +6,7 @@ public class Vehicle {
     private String make;
     private String model;
     private String type;
+    private String color;
     private int mileage;
     private double price;
 
@@ -84,7 +85,6 @@ public class Vehicle {
         this.color = color;
     }
 
-    private String color;
 
 
 

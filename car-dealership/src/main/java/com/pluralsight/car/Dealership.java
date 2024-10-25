@@ -2,11 +2,13 @@ package com.pluralsight.car;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Comparator;
+
 
 public class Dealership {
     static ArrayList<Vehicle> inventory = new ArrayList<>();
 
-    public Dealership() {
+    public void Dealership() {
         loadInventory();
     }
 
@@ -38,21 +40,62 @@ public class Dealership {
             throw new RuntimeException(e);
         }
     }
-    private void printHeader(String header) {
-        // Split the header and print each part
-        String[] headerParts = header.split("\\|");
-        System.out.printf("%-10s %-4s %-10s %-10s %-5s %-5s %-10s %-10s%n",
-                headerParts[0], headerParts[1], headerParts[2], headerParts[3],
-                headerParts[4], headerParts[5], headerParts[6], headerParts[7]);
+
+    public static void getVehiclesByPrice() {
+        inventory.sort(Comparator.comparingDouble(Vehicle::getPrice)); // sort price from lowest to highest
+
+        for (Vehicle vehicle : inventory) {
+            System.out.println("Price: "+ vehicle.getPrice());
+        }
+    }
+
+    public static void getVehiclesByMakeModel() {
+        for (Vehicle vehicle : inventory) {
+            System.out.println("Make and Model: " + vehicle.getMake() + " " + vehicle.getModel());
+        }
+    }
+
+    public static void getVehiclesByYear(){
+        for (Vehicle vehicle : inventory) {
+            System.out.println(vehicle.getYear());
+        }
+    }
+
+    public static void getVehiclesByColor() {
+        for (Vehicle vehicle : inventory){
+            System.out.println(vehicle.getColor());
+    }
+    }
+
+    public static void getVehicleByMileage() {
+        for (Vehicle vehicle : inventory) {
+            System.out.println(vehicle.getMileage());
+        }
+    }
+
+    public static void getVehicleByType() {
+        for (Vehicle vehicle : inventory) {
+            System.out.println(vehicle.getType());
+        }
+    }
+
+    public static void addVehicle() {
+
+    }
+
+    public static void removeVehicle() {
+
     }
 
 
-    public void displayInventory() {
+
+    public static void displayInventory() {
         for (Vehicle vehicle : inventory) {
             System.out.printf("VIN: %s, Year: %d, Make: %s, Model: %s, Type: %s, Color: %s, Mileage: %d, Price: %.2f%n",
                     vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getType(),
                     vehicle.getColor(), vehicle.getMileage(), vehicle.getPrice());
         }
     }
+
 }
 
