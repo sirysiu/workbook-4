@@ -1,8 +1,6 @@
 package com.pluralsight.car;
 
 import java.io.*;
-import java.nio.Buffer;
-import java.util.ArrayList;
 
 public class DealershipFileManger {
 
@@ -43,7 +41,21 @@ public class DealershipFileManger {
             FileWriter fileWriter = new FileWriter("src/main/resources/WorkshopFiles/inventory.csv");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
+            // Write dealership information
             bufferedWriter.write(String.format("%s|%s|%s\n", dealership.getName(), dealership.getAddress(), dealership.getPhone()));
+
+            // Write vehicle inventory
+            for (Vehicle vehicle : dealership.getInventory()) {
+                bufferedWriter.write(String.format("%d|%d|%s|%s|%s|%s|%d|%.2f\n",
+                        vehicle.getVin(),
+                        vehicle.getYear(),
+                        vehicle.getMake(),
+                        vehicle.getModel(),
+                        vehicle.getType(),
+                        vehicle.getColor(),
+                        vehicle.getMileage(),
+                        vehicle.getPrice()));
+            }
 
             bufferedWriter.close();
         } catch (IOException e) {
