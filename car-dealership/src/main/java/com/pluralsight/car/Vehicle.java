@@ -33,59 +33,34 @@ public class Vehicle {
         return vin;
     }
 
-    public void setVin(int vin) {
-        this.vin = vin;
-    }
-
     public int getYear() {
         return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
     }
 
     public String getMake() {
         return make;
     }
 
-    public void setMake(String make) {
-        this.make = make;
-    }
-
     public String getModel() {
         return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
     }
 
     public String getType() {
         return type;
     }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public int getMileage() {
         return mileage;
-    }
-
-    public void setMileage(int mileage) {
-        this.mileage = mileage;
     }
 
     public String getColor() {
         return color;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    @Override
+    public String toString() {
+        return String.format("VIN: %d, Year: %d, Make: %s, Model: %s, Type: %s, Color: %s, Mileage: %d, Price: %.2f",
+                vin, year, make, model, type, color, mileage, price);
     }
-
-
 
 
 }
