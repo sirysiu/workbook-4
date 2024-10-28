@@ -50,31 +50,27 @@ public class Dealership {
         this.name = name;
     }
 
-    public ArrayList<Vehicle> getVehiclesByPrice(double specificPrice) {
-        // Filter by specific price
-        // Collect to ArrayList
+    public ArrayList<Vehicle> getVehiclesByPrice(double minPrice, double maxPrice) {
+        ArrayList<Vehicle> vehiclesByPrice = inventory.stream()
+                .filter(vehicle -> vehicle.getPrice() >= minPrice && vehicle.getPrice() <= maxPrice) // Filter by price range
+                .collect(Collectors.toCollection(ArrayList::new)); // Collect to ArrayList
 
-        return inventory.stream()
-                .filter(vehicle -> vehicle.getPrice() == specificPrice) // Filter by specific price
-                .collect(Collectors.toCollection(ArrayList::new));
+        return vehiclesByPrice;
+    }
+    public ArrayList<Vehicle> getVehiclesByMakeModel(String make, String model) {
+        ArrayList<Vehicle> vehiclesByMakeModel = inventory.stream()
+                .filter(vehicle -> vehicle.getMake().equalsIgnoreCase(make) && vehicle.getModel().equalsIgnoreCase(model)) // Filter by make and model
+                .collect(Collectors.toCollection(ArrayList::new)); // Collect to ArrayList
+
+        return vehiclesByMakeModel;
     }
 
-    public ArrayList<Vehicle> getVehiclesByMakeModel() {
-        // Collect to an ArrayList
+    public ArrayList<Vehicle> getVehiclesByYear(int year) {
+        ArrayList<Vehicle> vehiclesByYear = inventory.stream()
+                .filter(vehicle -> vehicle.getYear() == year) // Filter by year
+                .collect(Collectors.toCollection(ArrayList::new)); // Collect to ArrayList
 
-        return inventory.stream()
-                .filter(vehicle -> vehicle.getMake() != null && !vehicle.getMake().isEmpty() &&
-                        vehicle.getModel() != null && !vehicle.getModel().isEmpty())
-                .collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    public ArrayList<Vehicle> getVehiclesByYear(int specificYear) {
-        // Filter by specific year
-        // Collect to ArrayList
-
-        return inventory.stream()
-                .filter(vehicle -> vehicle.getYear() == specificYear) // Filter by specific year
-                .collect(Collectors.toCollection(ArrayList::new));
+        return vehiclesByYear;
     }
 
     public ArrayList<Vehicle> getVehiclesByColor(String specificColor) {
@@ -103,8 +99,14 @@ public class Dealership {
     public void addVehicle(Vehicle vehicle) {
         inventory.add(vehicle);
     }
-    public void removeVehicle(Vehicle vehicle) {
-        inventory.remove(vehicle);
+    public boolean removeVehicle(int vin) {
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getVin() == vin) {
+                inventory.remove(vehicle);
+                return true; // Vehicle removed successfully
+            }
+        }
+        return false; // Vehicle not found
     }
 
 
