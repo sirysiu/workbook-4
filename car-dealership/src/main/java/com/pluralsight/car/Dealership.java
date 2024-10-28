@@ -1,101 +1,112 @@
 package com.pluralsight.car;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 
 public class Dealership {
-    static ArrayList<Vehicle> inventory = new ArrayList<>();
+    private String name;
+    private String address;
+    private String phone;
+    private ArrayList<Vehicle> inventory;
 
-    public void Dealership() {
-        loadInventory();
+    public Dealership(String name, String address, String phone) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.inventory = new ArrayList<>();
     }
 
-    private void loadInventory() {
-        try {
-            FileReader fileReader = new FileReader("src/main/resources/WorkshopFiles/inventory.csv");
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String header = bufferedReader.readLine();
-            System.out.println("Dealership: " + header);
-            String input;
-            while ((input = bufferedReader.readLine()) != null) {
-                String[] inventoryParts = input.split("\\|");
-                int vin = Integer.parseInt(inventoryParts[0]);
-                int year = Integer.parseInt(inventoryParts[1]);
-                String make = inventoryParts[2];
-                String model = inventoryParts[3];
-                String type = inventoryParts[4];
-                String color = inventoryParts[5];
-                int mileage = Integer.parseInt(inventoryParts[6]);
-                double priceRange = Double.parseDouble(inventoryParts[7]);
-
-                Vehicle vehicle = new Vehicle(vin, year, make, model, type, color, mileage, priceRange);
-                inventory.add(vehicle);
-
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public ArrayList<Vehicle> getInventory() {
+        return inventory;
     }
 
-    public static void getVehiclesByPrice() {
-        inventory.sort(Comparator.comparingDouble(Vehicle::getPrice)); // sort price from lowest to highest
-
-        for (Vehicle vehicle : inventory) {
-            System.out.println("Price: "+ vehicle.getPrice());
-        }
+    public void setInventory(ArrayList<Vehicle> inventory) {
+        this.inventory = inventory;
     }
 
-    public static void getVehiclesByMakeModel() {
-        for (Vehicle vehicle : inventory) {
-            System.out.println("Make and Model: " + vehicle.getMake() + " " + vehicle.getModel());
-        }
+    public String getPhone() {
+        return phone;
     }
 
-    public static void getVehiclesByYear(){
-        for (Vehicle vehicle : inventory) {
-            System.out.println(vehicle.getYear());
-        }
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public static void getVehiclesByColor() {
-        for (Vehicle vehicle : inventory){
-            System.out.println(vehicle.getColor());
-    }
+    public String getAddress() {
+        return address;
     }
 
-    public static void getVehicleByMileage() {
-        for (Vehicle vehicle : inventory) {
-            System.out.println(vehicle.getMileage());
-        }
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public static void getVehicleByType() {
-        for (Vehicle vehicle : inventory) {
-            System.out.println(vehicle.getType());
-        }
+    public String getName() {
+        return name;
     }
 
-    public static void addVehicle() {
-
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public static void removeVehicle() {
+    public ArrayList<Vehicle> getVehiclesByPrice(double specificPrice) {
+        // Filter by specific price
+        // Collect to ArrayList
 
+        return inventory.stream()
+                .filter(vehicle -> vehicle.getPrice() == specificPrice) // Filter by specific price
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    public ArrayList<Vehicle> getVehiclesByMakeModel() {
+        // Collect to an ArrayList
 
-
-    public static void displayInventory() {
-        for (Vehicle vehicle : inventory) {
-            System.out.printf("VIN: %s, Year: %d, Make: %s, Model: %s, Type: %s, Color: %s, Mileage: %d, Price: %.2f%n",
-                    vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getType(),
-                    vehicle.getColor(), vehicle.getMileage(), vehicle.getPrice());
-        }
+        return inventory.stream()
+                .filter(vehicle -> vehicle.getMake() != null && !vehicle.getMake().isEmpty() &&
+                        vehicle.getModel() != null && !vehicle.getModel().isEmpty())
+                .collect(Collectors.toCollection(ArrayList::new));
     }
+
+    public ArrayList<Vehicle> getVehiclesByYear(int specificYear) {
+        // Filter by specific year
+        // Collect to ArrayList
+
+        return inventory.stream()
+                .filter(vehicle -> vehicle.getYear() == specificYear) // Filter by specific year
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public ArrayList<Vehicle> getVehiclesByColor(String specificColor) {
+        ArrayList<Vehicle> vehiclesByColor = inventory.stream()
+                .filter(vehicle -> vehicle.getColor().equalsIgnoreCase(specificColor)) // Filter by specific color
+                .collect(Collectors.toCollection(ArrayList::new)); // Collect to ArrayList
+
+        return vehiclesByColor;
+    }
+    public ArrayList<Vehicle> getVehiclesByMileage(int specificMileage) {
+        ArrayList<Vehicle> vehiclesByMileage = inventory.stream()
+                .filter(vehicle -> vehicle.getMileage() == specificMileage) // Filter by specific mileage
+                .collect(Collectors.toCollection(ArrayList::new)); // Collect to ArrayList
+
+        return vehiclesByMileage;
+    }
+
+    public ArrayList<Vehicle> getVehiclesByType(String specificType) {
+        ArrayList<Vehicle> vehiclesByType = inventory.stream()
+                .filter(vehicle -> vehicle.getType().equalsIgnoreCase(specificType)) // Filter by specific type
+                .collect(Collectors.toCollection(ArrayList::new)); // Collect to ArrayList
+
+        return vehiclesByType;
+    }
+
+    public void addVehicle(Vehicle vehicle) {
+        inventory.add(vehicle);
+    }
+    public void removeVehicle(Vehicle vehicle) {
+        inventory.remove(vehicle);
+    }
+
 
 }
 
