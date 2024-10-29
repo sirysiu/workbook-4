@@ -5,7 +5,7 @@ import java.io.*;
 public class DealershipFileManger {
 
     public Dealership getDealership() {
-        Dealership dealership = null;
+        Dealership dealership;
             try {
                 FileReader fileReader = new FileReader("src/main/resources/WorkshopFiles/inventory.csv");
                 BufferedReader bufferedReader = new BufferedReader(fileReader);

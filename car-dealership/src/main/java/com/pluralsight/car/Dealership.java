@@ -1,15 +1,14 @@
 package com.pluralsight.car;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.stream.Collectors;
 
 
 public class Dealership {
-    private String name;
-    private String address;
-    private String phone;
-    private ArrayList<Vehicle> inventory;
+    private final String name;
+    private final String address;
+    private final String phone;
+    private final ArrayList<Vehicle> inventory;
 
     public Dealership(String name, String address, String phone) {
         this.name = name;
@@ -22,33 +21,21 @@ public class Dealership {
         return inventory;
     }
 
-    public void setInventory(ArrayList<Vehicle> inventory) {
-        this.inventory = inventory;
-    }
 
     public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public ArrayList<Vehicle> getVehiclesByPrice(double minPrice, double maxPrice) {
         ArrayList<Vehicle> vehiclesByPrice = inventory.stream()
